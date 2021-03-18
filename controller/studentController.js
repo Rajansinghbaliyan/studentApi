@@ -42,7 +42,7 @@ exports.updateStudent = async (req, res, next) => {
       new: true,
     });
     if (!student) throw new Error("Please enter the valid Id");
-    res.status(200).json({
+    res.status(201).json({
       status: "success",
       message: "updated successfully",
       data: { student },
@@ -60,6 +60,10 @@ exports.deleteStudent = async (req, res, next) => {
     const id = parseInt(req.params.id);
     const student = await Student.deleteOne({ _id: id });
     if (!student) throw new Error("Please enter the valid Id");
+    res.status(204).json({
+        status: "success",
+        message: "Deleted successfully",
+      });
   } catch (err) {
     res.status(400).json({
       status: "fail",
